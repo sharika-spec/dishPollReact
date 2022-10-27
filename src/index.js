@@ -2,23 +2,25 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
-// import reportWebVitals from "./reportWebVitals";
 import { SnackbarProvider } from "notistack";
+import { BrowserRouter } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <SnackbarProvider
-      maxSnack={1}
-      anchorOrigin={{
-        vertical: "bottom",
-        horizontal: "center",
-      }}
-      preventDuplicate
-    >
-      <App />
-    </SnackbarProvider>
+    <BrowserRouter>
+      <SnackbarProvider
+        maxSnack={1}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "center",
+        }}
+        preventDuplicate
+      >
+        <App />
+      </SnackbarProvider>
+    </BrowserRouter>
   </React.StrictMode>
 );
 
-// reportWebVitals();
+

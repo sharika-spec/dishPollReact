@@ -37,7 +37,7 @@ export default function Poll({
       >
         <Box sx={{ flexWrap: "wrap" }} m={2}>
           <Grid container>
-            {dishes.map((item) => (
+            {dishes && dishes.map((item) => (
               <Grid item key={item.id} xs={6} md={4}>
                 <FormControlLabel
                   key={item.id}

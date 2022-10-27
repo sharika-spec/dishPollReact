@@ -10,6 +10,7 @@ import Results from "./Results.js";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
+
   return (
     <div
       role="tabpanel"
@@ -42,6 +43,7 @@ function a11yProps(index) {
 
 export default function BasicTabs() {
   const [value, setValue] = React.useState(0);
+  const {userId} = JSON.parse(window.localStorage.getItem("UserId"));
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -62,7 +64,7 @@ export default function BasicTabs() {
         <Stepper />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <Results userId={1}/>
+        <Results userId={userId}/>
       </TabPanel>
     </Box>
   );

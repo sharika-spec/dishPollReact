@@ -13,7 +13,9 @@ export default function Results({ userId }) {
   const [overallResults, setOverallResultsArray] = React.useState([]);
   React.useEffect(() => {
     const userPollArray = JSON.parse(window.localStorage.getItem("UserPoll"));
-    if (userPollArray) setRows(userPollArray[userId - 1].rankList);
+    if (userPollArray[userId-1]) {
+      setRows(userPollArray[userId-1].rankList);
+    }
     const overallResultsArray = JSON.parse(
       window.localStorage.getItem("OverallResults")
     );
@@ -49,7 +51,7 @@ export default function Results({ userId }) {
           </TableBody>
         </Table>
       </TableContainer>
-      <br/>
+      <br />
       <div>Overall results</div>
       <TableContainer component={Paper}>
         <Table aria-label="simple table">

@@ -10,7 +10,6 @@ import axios from "axios";
 import OverallResults from "../overallResults.json";
 import { useSnackbar } from "notistack";
 
-
 const steps = ["Rank 1", "Rank 2", "Rank 3"];
 const score = [30, 20, 10];
 
@@ -21,8 +20,7 @@ export default function CustomStepper() {
   const [rankedItems, setRankedItems] = React.useState(new Map());
   const [ids, setIds] = React.useState(new Map());
   const [dishes, setDishes] = React.useState([]);
-  const {enqueueSnackbar} = useSnackbar();
-
+  const { enqueueSnackbar } = useSnackbar();
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -32,7 +30,7 @@ export default function CustomStepper() {
 
     setValue("");
     if (activeStep + 1 === steps.length) {
-           enqueueSnackbar("Click on results", {
+      enqueueSnackbar("Click on results", {
         variant: "success",
         autoHideDuration: 1000,
       });
@@ -65,11 +63,11 @@ export default function CustomStepper() {
           const rank = ids.get(String(key));
           newOverallResults[i].score = prevScore + score[rank - 1];
         }
-        newOverallResults.sort((a,b)=>b.score - a.score);
-         window.localStorage.setItem(
-            "OverallResults",
-            JSON.stringify(newOverallResults)
-          );
+        newOverallResults.sort((a, b) => b.score - a.score);
+        window.localStorage.setItem(
+          "OverallResults",
+          JSON.stringify(newOverallResults)
+        );
       }
     }
   };
@@ -105,6 +103,10 @@ export default function CustomStepper() {
       } else {
         console.log("Error", error.message);
       }
+      enqueueSnackbar(error.message, {
+        variant: "error",
+        autoHideDuration: 1000,
+      });
     }
   };
 
