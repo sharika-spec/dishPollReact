@@ -4,9 +4,8 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import Poll from "./Poll.js";
-import Grid from "@mui/material/Grid";
-import  Stepper  from "./PollStepper.js";
+import Stepper from "./CustomStepper.js";
+import Results from "./Results.js";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -21,7 +20,7 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
+          <Typography component={'div'}>{children}</Typography>
         </Box>
       )}
     </div>
@@ -54,21 +53,16 @@ export default function BasicTabs() {
         value={value}
         onChange={handleChange}
         centered
-        aria-label="basic tabs example"
+        aria-label="basic tabs"
       >
         <Tab label="Poll" {...a11yProps(0)} />
-        <Tab label="Results" {...a11yProps(1)} />
+        <Tab label="Result" {...a11yProps(1)} />
       </Tabs>
       <TabPanel value={value} index={0}>
-        {/* <Box sx={{ flexGrow: 1 }}> */}
-          {/* <Grid container spacing={2}> */}
-            <Stepper/>
-            {/* <Poll /> */}
-          {/* </Grid> */}
-        {/* </Box> */}
+        <Stepper />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Results
+        <Results userId={1}/>
       </TabPanel>
     </Box>
   );

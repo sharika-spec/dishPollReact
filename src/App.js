@@ -4,12 +4,10 @@ import Tab from "./components/Tab.js";
 function App() {
   return (
     <div className="App">
-      {/* <header className="App-header"> */}
         <Box sx={{ borderBottom: 1, borderColor: "divider" }} m={1}>
-          <p>Dish Poll</p>
+          Dish Poll 
         </Box>
         <Tab />
-      {/* </header> */}
     </div>
   );
 }
