@@ -49,9 +49,19 @@ export default function CustomStepper() {
         createData(ids[i - 1], i, rankedItems.get(i), score[i - 1])
       );
     }
+    let currentUser = JSON.parse(window.localStorage.getItem("UserId"));
+ 
+    const userPollDetails = { userId: currentUser.userId, rankList: userRankList };
+    
+    const userPollArray = JSON.parse(window.localStorage.getItem("UserPoll"));
+    if(!userPollArray)
+    window.localStorage.setItem("UserPoll", JSON.stringify([userPollDetails]));
+    else
+    {
+      userPollArray.push(userPollDetails);
+      window.localStorage.setItem("UserPoll", JSON.stringify(userPollArray));
 
-    const userPollDetails = [{ userId: 1, rankList: userRankList }];
-    window.localStorage.setItem("UserPoll", JSON.stringify(userPollDetails));
+    }
 
     const newOverallResults = getOverallResults();
 

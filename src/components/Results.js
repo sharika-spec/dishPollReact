@@ -13,8 +13,20 @@ export default function Results({ userId }) {
   const [overallResults, setOverallResultsArray] = React.useState([]);
   React.useEffect(() => {
     const userPollArray = JSON.parse(window.localStorage.getItem("UserPoll"));
-    if (userPollArray[userId-1]) {
-      setRows(userPollArray[userId-1].rankList);
+    let currentUserPoll;
+    if(userPollArray)
+    {
+      for(let i=0;i<userPollArray.length;i++)
+    {
+      if(userPollArray[i].userId === userId)
+      {
+        currentUserPoll = userPollArray[i];
+      }
+    }
+    }
+    
+    if (userId !==-1 && userPollArray && currentUserPoll) {
+      setRows(currentUserPoll.rankList);
     }
     const overallResultsArray = JSON.parse(
       window.localStorage.getItem("OverallResults")

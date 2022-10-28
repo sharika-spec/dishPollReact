@@ -5,14 +5,14 @@ import { useNavigate } from "react-router-dom";
 import Users from "../users.json";
 import { useSnackbar } from "notistack";
 
-export default function Login() {
+export default function Login({isLogged,setIsLogged}) {
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
-  let isLogged = false;
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
+  let loggedIn = false;
 
   const handleInput = (e) => {
     const [key, value] = [e.target.name, e.target.value];
@@ -29,12 +29,13 @@ export default function Login() {
           variant: "success",
           autoHideDuration: 1000,
         });
-        isLogged = true;
+        setIsLogged(true);
+        loggedIn = true;
         window.localStorage.setItem("UserId", JSON.stringify({userId:Users[i].id}));
         navigate("/poll");
       }
     }
-    if (!isLogged) {
+    if (!loggedIn) {
       enqueueSnackbar("Incorrect username or password", {
         variant: "error",
         autoHideDuration: 1000,

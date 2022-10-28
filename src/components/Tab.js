@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Stepper from "./CustomStepper.js";
 import Results from "./Results.js";
+import Header from "./Header.js";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -21,7 +22,7 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box sx={{ p: 3 }}>
-          <Typography component={'div'}>{children}</Typography>
+          <Typography component={"div"}>{children}</Typography>
         </Box>
       )}
     </div>
@@ -43,7 +44,8 @@ function a11yProps(index) {
 
 export default function BasicTabs() {
   const [value, setValue] = React.useState(0);
-  const {userId} = JSON.parse(window.localStorage.getItem("UserId"));
+ 
+  let userIdObj = JSON.parse(window.localStorage.getItem("UserId"));
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -51,6 +53,7 @@ export default function BasicTabs() {
 
   return (
     <Box sx={{ width: "100%" }}>
+      <Header />
       <Tabs
         value={value}
         onChange={handleChange}
@@ -61,10 +64,10 @@ export default function BasicTabs() {
         <Tab label="Result" {...a11yProps(1)} />
       </Tabs>
       <TabPanel value={value} index={0}>
-        <Stepper />
+        {userIdObj ? <Stepper />: <div>Please login to participate in polling.</div>}
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <Results userId={userId}/>
+        <Results userId={userIdObj ? userIdObj.userId : -1} />
       </TabPanel>
     </Box>
   );
